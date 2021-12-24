@@ -31,6 +31,11 @@ class Telescope:
         self.__class__.validateLookAt(destination)
         self.destination = destination
 
-        print('moving to ' + str(self.destination) + '...')
+        # print('moving to ' + str(self.destination) + '...')
+
+        self._doMove(axisIdx, direction, amount)
 
         self.lookAt = self.destination
+
+    def _doMove(self, axisIdx, direction, amount):
+        print('Not implemented')
