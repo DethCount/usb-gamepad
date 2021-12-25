@@ -3,7 +3,7 @@
  
 # telescope_driver
 Use this project on a raspberry pi and install [telescope_driver](https://github.com/DethCount/telescope_driver) on an arduino to send commands to a MKS Base 1.0 board to control telescope motors with your gamepad. \
-Use [ptpip-5300](https://github.com/DethCount/ptpip-d5300) on your raspberry pi to live view your camera while controling the telescope.
+Use [ptpip-d5300](https://github.com/DethCount/ptpip-d5300) on your raspberry pi to live view your camera while controling the telescope.
 
 # Getting started
 > python3 main.py
