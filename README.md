@@ -2,7 +2,7 @@
  Use HID gamepad to control telescope motors on Windows/Linux/Darwin
  
 # telescope_driver
-Use this project on a raspberry pi and install [https://github.com/DethCount/telescope_driver] on an arduino to send commands to a MKS Base 1.0 board to control telescope motors with your gamepad.
+Use this project on a raspberry pi and install [telescope_driver](https://github.com/DethCount/telescope_driver) on an arduino to send commands to a MKS Base 1.0 board to control telescope motors with your gamepad.
 
 > python3 main.py
 
