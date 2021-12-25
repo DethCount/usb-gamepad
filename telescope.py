@@ -24,7 +24,7 @@ class Telescope:
         if len(lookAt[1]) < 2:
             raise Exception('Invalid axe 1')
 
-    def move(self, axisIdx, direction, amount):
+    async def move(self, axisIdx, direction, amount):
         destination = self.initialLookAt if self.destination is None else self.destination
         destination[axisIdx][direction] += amount
 
@@ -33,9 +33,9 @@ class Telescope:
 
         # print('moving to ' + str(self.destination) + '...')
 
-        self._doMove(axisIdx, direction, amount)
+        await self._doMove(axisIdx, direction, amount)
 
         self.lookAt = self.destination
 
-    def _doMove(self, axisIdx, direction, amount):
+    async def _doMove(self, axisIdx, direction, amount):
         print('Not implemented')
