@@ -1,5 +1,5 @@
 class Telescope:
-    def __init__(self, isEquatorial = False, lookAt = [[0, 0], [0, 0]], destination = None):
+    def __init__(self, isEquatorial = False, lookAt = [[0, 0], [0, 0], [0, 0]], destination = None):
         super(Telescope, self).__init__()
 
         self.isEquatorial = isEquatorial
@@ -13,6 +13,8 @@ class Telescope:
             self.destination = destination
         else:
             self.destination = self.initialLookAt
+
+        self.directions = [[1, 1], [1, 1], [1, 1]]
 
     def validateLookAt(lookAt):
         if len(lookAt) < 2:
@@ -33,13 +35,14 @@ class Telescope:
 
         # print('moving to ' + str(self.destination) + '...')
 
-        await self._doMove(axisIdx, direction, amount)
+        await self._doMove(axisIdx, direction, self.directions[axisIdx][direction] * amount)
 
         self.lookAt = self.destination
+    async def changeDir(self, axisIdx, direction):
+        self.directions[axisIdx][direction] = -1 * self.directions[axisIdx][direction]
 
     async def emergencyStop(self, axisIdx):
         await self._doEmergencyStop(axisIdx)
-        raise Exception('Emergency stop btn was pressed')
 
     async def _doMove(self, axisIdx, direction, amount):
         print('Not implemented')

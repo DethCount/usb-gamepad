@@ -7,14 +7,14 @@ from bleak import BleakClient
 from telescope import Telescope
 
 class BluetoothTelescope(Telescope):
-    def __init__(self, client, characteristicUuid, isEquatorial = False, lookAt = [[0, 0], [0, 0]], destination = None):
+    def __init__(self, client, characteristicUuid, isEquatorial = False, lookAt = [[0, 0], [0, 0], [0, 0]], destination = None):
         super().__init__(isEquatorial, lookAt, destination)
 
         self.client = client
         self.characteristicUuid = characteristicUuid
 
-        self.lastMove = [[None, None], [None, None]]
-        self.moveTask = [[None, None], [None, None]]
+        self.lastMove = [[None, None], [None, None], [None, None]]
+        self.moveTask = [[None, None], [None, None], [None, None]]
 
     async def _doMove(self, axisIdx, direction, amount):
         t = time.time()
@@ -29,8 +29,19 @@ class BluetoothTelescope(Telescope):
             return
 
         cmd = None
-        if (axisIdx == 0 and direction == 0) or (axisIdx == 1 and direction == 1):
-            cmd = 'MOVE ' + ('Y' if axisIdx == 1 else 'X') + ' ' + '{:.9f}'.format(amount)
+        
+        axis = None
+        if (axisIdx == 0 and direction == 0):
+            axis = 'X'
+        elif (axisIdx == 1 and direction == 1):
+            axis = 'Y'
+        elif (axisIdx == 2 and direction == 0):
+            axis = 'Z'
+        elif (axisIdx == 2 and direction == 1):
+            axis = 'E'
+
+        if (axis != None):
+            cmd = 'MOVE ' + axis + ' ' + '{:.9f}'.format(amount)
 
         if cmd != None:
             print(cmd)

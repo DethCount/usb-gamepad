@@ -14,11 +14,11 @@ async def main():
         bluetoothClient,
         '0000ffe1-0000-1000-8000-00805f9b34fb',
         isEquatorial=True,
-        lookAt=[[0,0],[0,0]],
+        lookAt=[[0,0],[0,0],[0,0]],
         destination=None
     )
     maxInt = 2**15 # signed int16
-    debug = False
+    debug = True
 
     while True:
         events = get_gamepad()
@@ -34,6 +34,12 @@ async def main():
                 elif event.code == 'BTN_THUMBR':
                     if debug: print('BTN_THUMBR')
                     await telescope.emergencyStop(1)
+                elif event.code == 'BTN_TL':
+                    if debug: print('BTN_TL')
+                    await telescope.changeDir(2, 0)
+                elif event.code == 'BTN_TR':
+                    if debug: print('BTN_TR')
+                    await telescope.changeDir(2, 1)
             elif event.ev_type == 'Absolute':
                 if debug: print('Absolute event')
                 if event.code == 'ABS_X':
@@ -42,12 +48,18 @@ async def main():
                 elif event.code == 'ABS_Y':
                     if debug: print('ABS_Y')
                     await telescope.move(0, 1, event.state / maxInt)
+                elif event.code == 'ABS_Z':
+                    if debug: print('ABS_Z')
+                    await telescope.move(2, 0, event.state / 1024)
                 elif event.code == 'ABS_RX':
                     if debug: print('ABS_RX')
                     await telescope.move(1, 0, event.state / maxInt)
                 elif event.code == 'ABS_RY':
                     if debug: print('ABS_RY')
                     await telescope.move(1, 1, event.state / maxInt)
+                elif event.code == 'ABS_RZ':
+                    if debug: print('ABS_RZ')
+                    await telescope.move(2, 1, event.state / 1024)
 
 if __name__ == "__main__":
     run(main())
