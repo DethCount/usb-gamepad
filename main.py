@@ -30,10 +30,10 @@ async def main():
                 if debug: print('Key event')
                 if event.code == 'BTN_THUMBL':
                     if debug: print('BTN_THUMBL')
-                    await telescope.emergencyStop(0, event.state / maxInt)
+                    await telescope.emergencyStop(0)
                 elif event.code == 'BTN_THUMBR':
                     if debug: print('BTN_THUMBR')
-                    await telescope.emergencyStop(1, event.state / maxInt)
+                    await telescope.emergencyStop(1)
             elif event.ev_type == 'Absolute':
                 if debug: print('Absolute event')
                 if event.code == 'ABS_X':

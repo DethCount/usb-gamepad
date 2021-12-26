@@ -30,9 +30,12 @@ class BluetoothTelescope(Telescope):
 
         cmd = None
         if (axisIdx == 0 and direction == 0) or (axisIdx == 1 and direction == 1):
-            cmd = 'MOVE ' + ('Y' if axisIdx == 1 else 'X') + ' ' + '{:.10f}'.format(amount)
+            cmd = 'MOVE ' + ('Y' if axisIdx == 1 else 'X') + ' ' + '{:.9f}'.format(amount)
 
         if cmd != None:
             print(cmd)
             await self.client.write_gatt_char(self.characteristicUuid, bytes(cmd + '\n', 'ascii'), response=True)
             self.lastMove[axisIdx][direction] = t
+
+    async def _doEmergencyStop(self, axisIdx):
+        await self.client.write_gatt_char(self.characteristicUuid, b'STOP\n', response=True)

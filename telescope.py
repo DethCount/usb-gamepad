@@ -37,5 +37,12 @@ class Telescope:
 
         self.lookAt = self.destination
 
+    async def emergencyStop(self, axisIdx):
+        await self._doEmergencyStop(axisIdx)
+        raise Exception('Emergency stop btn was pressed')
+
     async def _doMove(self, axisIdx, direction, amount):
+        print('Not implemented')
+
+    async def _doEmergencyStop(self, axisIdx):
         print('Not implemented')
