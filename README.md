@@ -11,3 +11,4 @@ Use [ptpip-d5300](https://github.com/DethCount/ptpip-d5300) on your raspberry pi
 Wait for bluetooth connection then :
 - use gamepad joypad. It sends MOVE commands with normalized speed ([-1;1]) through Bluetooth. X is left-right on left joypad, Y is up-down on right joypad.
 - use joypad clicking: It sends STOP command.
+- use left/right trigger to move Z/E motor and left/right trigger top button to change motor direction
